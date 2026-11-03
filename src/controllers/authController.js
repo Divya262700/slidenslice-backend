@@ -14,10 +14,10 @@ exports.login = async (req, res) => {
   const ok = await bcrypt.compare(password, user.password_hash);
   if (!ok) return res.status(401).json({ message: 'Invalid email or password' });
 
-  const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '7d' });
-  res.json({ token, user: { id: user.id, email: user.email } });
+  const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '15m' });
+  res.json({ token,message:'Login successfully', user: { id: user.id, email: user.email } });
 };
 
 exports.me = (req, res) => {
-  res.json({ user: req.user });
+  res.json({success:true, user: req.user });
 };
